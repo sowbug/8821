@@ -1,0 +1,6 @@
+*.o
+*~
+.DS_Store
+
+# We check in .hex on a case-by-case basis. Not everyone who is interested
+# in this project needs to have an AVR toolchain installed.
