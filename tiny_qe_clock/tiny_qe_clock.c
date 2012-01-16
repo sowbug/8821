@@ -1,19 +1,23 @@
 /* Tiny QE Clock
  *
- * Generates a slow but working Q/E clock signal for the MC6809E CPU.
- * Designed for an ATtiny13A running at 9.6MHz, which is able to put
- * out a 285kHz signal with Q on PB3 and E on PB4, nowhere near the
- * 1MHz capability of the slowest '09, but good enough to build a
- * circuit with it. TODO: can PWM do a better job?
+ * Copyright © 2012 Mike Tsao. Use, modification, and distribution are subject
+ * to the BSD license as described in the accompanying LICENSE file.
+ *
+ * Generates a slow but working Q/E clock signal for the MC6809E CPU.  Designed
+ * for an ATtiny13A running at 9.6MHz, which is able to put out a 285kHz signal
+ * with Q on PB3 and E on PB4, nowhere near the 1MHz capability of the slowest
+ * '09, but good enough to build a circuit with it. TODO: can PWM do a better
+ * job?
  *
  * Part of the 8821 Project: http://www.sowbug.com/tagged/8821
+ *
+ * Using fuse calculator from http://www.engbedded.com/fusecalc/, determined
+ * that the right avrdude magic for the internal 9.6MHz clock with SUT 14+64
+ * was...
+ *
+ * -U lfuse:w:0x7a:m -U hfuse:w:0xff:m
  */
 
-// Using fuse calculator from http://www.engbedded.com/fusecalc/, determined
-// that the right avrdude magic for the internal 9.6MHz clock with SUT 14+64
-// was...
-//
-// -U lfuse:w:0x7a:m -U hfuse:w:0xff:m
 
 #include <avr/io.h>
 
