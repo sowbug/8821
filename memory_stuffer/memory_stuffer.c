@@ -10,6 +10,8 @@
  * also, to Ladyada's part finder <http://www.ladyada.net/wiki/partfinder/ic>,
  * which caused me to have plenty of '595s on hand.
  *
+ * The SRAM part number I'm using is AS6C4008, but any should work.
+ *
  * Part of the 8821 Project: http://www.sowbug.com/tagged/8821
  */
 
@@ -20,6 +22,7 @@
 
 
 int main(void) {
+
   // '595 datasheet (and Quinn) recommend tying together SRCLK and RCLK. We do
   // so and toggle them both on this pin. But it means the storage register
   // will be one clock behind the shift register, so we need one more clock to
@@ -32,8 +35,10 @@ int main(void) {
   // even across multiple chips.
   register uint8_t LATCH_IN = _BV(PB1);
 
-  // Send this low to tell /OE that it's time to move what's been latched onto
-  // all the Q (parallel) pins.
+  // Send this low to tell the SRAM (or EEPROM, or whoever's connected to the
+  // other end of the Q pins) that the Q pins are in a good state for reading.
+  // The SRAM I'm using will accept this signal on its /CE pin if /WE is tied
+  // high.
   register uint8_t STROBE = _BV(PB2);
 
   // Set a line to let everyone (including my logic analyzer) know the loop is
